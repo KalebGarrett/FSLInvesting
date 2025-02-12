@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSLInvesting.App", "FSLInvesting.App\FSLInvesting.App.csproj", "{FAD340B8-8BF5-4C5C-9E9D-3909B5900839}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSLInvesting.Api", "FSLInvesting.Api\FSLInvesting.Api.csproj", "{60425262-2578-4642-8176-8783A6B640D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{FAD340B8-8BF5-4C5C-9E9D-3909B5900839}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAD340B8-8BF5-4C5C-9E9D-3909B5900839}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAD340B8-8BF5-4C5C-9E9D-3909B5900839}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60425262-2578-4642-8176-8783A6B640D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60425262-2578-4642-8176-8783A6B640D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60425262-2578-4642-8176-8783A6B640D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60425262-2578-4642-8176-8783A6B640D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
