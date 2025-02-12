@@ -8,8 +8,8 @@ a, .btn-link {
 
 .btn-primary {
     color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    background-color: #AC7B1C;
+    border-color: #AC7B1C;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -48,4 +48,24 @@ h1:focus {
 
 .darker-border-checkbox.form-check-input {
     border-color: #929292;
+}
+
+body {
+    background-color: #000000 !important;
+}
+
+video#background-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    opacity: 10%;
+}
+
+.bg-form-img {
+    background: url("Images/Investing.png");
+    background-size: cover;
+    opacity: 85%;
 }
