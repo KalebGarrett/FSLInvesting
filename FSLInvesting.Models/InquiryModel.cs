@@ -5,7 +5,7 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace FSLInvesting.Models;
 
 [BsonCollection("FormInquiries")]
-public class FormModel : IDocument
+public class InquiryModel : IDocument
 {
     [BsonId] public string Id { get; set; }
     public DateTime CreatedAt { get; set; }
