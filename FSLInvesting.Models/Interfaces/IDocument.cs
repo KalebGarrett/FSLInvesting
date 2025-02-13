@@ -8,5 +8,4 @@ public interface IDocument
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
     public int Version { get; set; }
-    public bool Deleted { get; set; }
 }

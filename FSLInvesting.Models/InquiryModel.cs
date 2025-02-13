@@ -11,7 +11,6 @@ public class InquiryModel : IDocument
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
     public int Version { get; set; }
-    public bool Deleted { get; set; }
     [Required] public string Name { get; set; }
     [Required] public int Number { get; set; }
     [Required] public string Email { get; set; }
