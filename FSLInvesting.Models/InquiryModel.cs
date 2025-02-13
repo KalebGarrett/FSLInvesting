@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace FSLInvesting.Models;
 
-[BsonCollection("FormInquiries")]
+[BsonCollection("Inquiries")]
 public class InquiryModel : IDocument
 {
     [BsonId] public string Id { get; set; }
