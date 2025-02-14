@@ -12,9 +12,9 @@ public class InquiryModel : IDocument
     public DateTime UpdatedAt { get; set; }
     public int Version { get; set; }
     [Required] public string Name { get; set; }
-    [Required] public int Number { get; set; }
+    [Required] public string Number { get; set; }
     [Required] public string Email { get; set; }
-    [Required] public string MonthlyPurchases { get; set; }
+    [Required] public int MonthlyPurchases { get; set; }
     [Required] public bool AcceptsMonthlyDeals { get; set; }
     [Required] public string TargetAreas { get; set; }
     [Required] public string BuyingRequirements { get; set; }
