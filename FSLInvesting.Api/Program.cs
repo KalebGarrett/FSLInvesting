@@ -1,3 +1,10 @@
+using FSLInvesting.Api.Authentication;
+using FSLInvesting.Api.Repositories;
+using FSLInvesting.Api.Repositories.Interfaces;
+using FSLInvesting.Api.Settings;
+using FSLInvesting.Api.Settings.Interfaces;
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +13,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ApiKeyFilter>();
+
+builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));
+builder.Services.AddSingleton<IMongoDbSettings>(sp => sp.GetRequiredService<IOptions<MongoDbSettings>>().Value);
+
+builder.Services.AddScoped(typeof(IMongoRepository<>), typeof(InquiryRepository<>));
 
 var app = builder.Build();
 
