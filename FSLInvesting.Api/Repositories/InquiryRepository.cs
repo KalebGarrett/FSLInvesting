@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using FSLInvesting.Api.Repositories.Interfaces;
+﻿using FSLInvesting.Api.Repositories.Interfaces;
 using FSLInvesting.Api.Settings.Interfaces;
 using FSLInvesting.Models;
 using FSLInvesting.Models.Interfaces;
@@ -16,12 +15,12 @@ public class InquiryRepository<TDocument> : IMongoRepository<TDocument> where TD
         var database = new MongoClient(settings.ConnectionString).GetDatabase(settings.DatabaseName);
         _collection = database.GetCollection<TDocument>(GetCollectionName(typeof(TDocument)));
     }
-    
+
     public IQueryable<TDocument> AsQueryable()
     {
         return _collection.AsQueryable();
     }
-    
+
     public async Task InsertOneAsync(TDocument document)
     {
         document.Id = Guid.NewGuid().ToString();
@@ -37,12 +36,12 @@ public class InquiryRepository<TDocument> : IMongoRepository<TDocument> where TD
         document.Version++;
         await _collection.ReplaceOneAsync(x => x.Id == id, document);
     }
-    
+
     public async Task DeleteOneAsync(string id)
     {
         await _collection.DeleteOneAsync(x => x.Id == id);
     }
-    
+
     private string GetCollectionName(Type documentType)
     {
         return ((BsonCollectionAttribute) documentType.GetCustomAttributes(

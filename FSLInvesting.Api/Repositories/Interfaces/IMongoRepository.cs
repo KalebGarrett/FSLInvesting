@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using FSLInvesting.Models.Interfaces;
+﻿using FSLInvesting.Models.Interfaces;
 
 namespace FSLInvesting.Api.Repositories.Interfaces;
 

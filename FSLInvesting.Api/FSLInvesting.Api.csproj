@@ -7,17 +7,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MongoDB.Bson" Version="3.2.0" />
-        <PackageReference Include="MongoDB.Driver" Version="3.2.0" />
+        <PackageReference Include="MongoDB.Bson" Version="3.2.0"/>
+        <PackageReference Include="MongoDB.Driver" Version="3.2.0"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\FSLInvesting.Models\FSLInvesting.Models.csproj" />
+        <ProjectReference Include="..\FSLInvesting.Models\FSLInvesting.Models.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Authentication\Constants\" />
+        <Folder Include="Authentication\Constants\"/>
     </ItemGroup>
 
 </Project>
