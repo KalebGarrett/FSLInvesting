@@ -33,7 +33,7 @@ else
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "FSLInvesting API V1");
         options.RoutePrefix = string.Empty;
     });
 }

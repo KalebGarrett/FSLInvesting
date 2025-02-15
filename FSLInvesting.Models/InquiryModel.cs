@@ -18,5 +18,5 @@ public class InquiryModel : IDocument
     [Required] public bool AcceptsMonthlyDeals { get; set; }
     [Required] public string TargetAreas { get; set; }
     [Required] public string BuyingRequirements { get; set; }
-    public string Note { get; set; }
+    public string Notes { get; set; }
 }
