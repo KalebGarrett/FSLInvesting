@@ -16,8 +16,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Pages\Home.cs">
-        <DependentUpon>Home.razor</DependentUpon>
+      <Compile Update="Pages\Form.cs">
+        <DependentUpon>Form.razor</DependentUpon>
       </Compile>
     </ItemGroup>
 

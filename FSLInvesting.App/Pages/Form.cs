@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace FSLInvesting.App.Pages;
 
-public partial class Home
+public partial class Form
 {
     [Inject] private InquiryService _inquiryService { get; set; }
     [Inject] NavigationManager _navigationManager { get; set; }
