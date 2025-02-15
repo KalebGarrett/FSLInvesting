@@ -13,7 +13,7 @@ public class InquiryService
         _client = client;
     }
 
-    public async Task Create(InquiryModel inquiry)
+    public async Task<bool> Create(InquiryModel inquiry)
     {
         _client.DefaultRequestHeaders.Add("x-api-key", "D2355Ca4-9eED-4C6D-Bc49-D4447028759c");
         
@@ -21,11 +21,6 @@ public class InquiryService
         var content = new StringContent(json, Encoding.UTF8, "application/json");
         var result = await _client.PostAsync("Inquiry", content);
 
-        Console.WriteLine("FUCK");
-        if (!result.IsSuccessStatusCode)
-        {
-            Console.WriteLine(result.RequestMessage);
-            Console.WriteLine("Go fuck yourself...");
-        }
+        return result.IsSuccessStatusCode;
     }
 }

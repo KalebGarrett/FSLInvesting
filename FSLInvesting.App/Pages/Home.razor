@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿@page "/inquiry"
 
 <PageTitle>Inquiry Form</PageTitle>
 
@@ -6,11 +6,17 @@
     <source src="Videos/Land.mp4" type="video/mp4">
 </video>
 
+<style>
+    body {
+       background-color: black;
+    }
+</style>
+
 <div class="container justify-content-center mb-3">
     <div class="row no-gutters">
         <div class="col-12 col-lg-5 rounded-1 bg-form-img"></div>
         <div class="col-12 col-lg-7 rounded-1">
-            <form @onsubmit="Create" class="p-3 rounded-1 " style="background-color: #FFFFFF;">
+            <form @onsubmit="HandleForm" class="p-3 rounded-1 " style="background-color: #FFFFFF;">
                 <img class="img-fluid mx-auto d-block" style="width: 250px" src="Images/FSL Logo.png" alt="FSL Investing"/>
                 <div class="row">
                     <div class="col-12 col-md-6">
@@ -35,10 +41,9 @@
                                         <i class="fa fa-phone"></i>
                                     </div>
                                 </div>
-                                <input @bind="Inquiry.Number" id="phone-number" name="phone-number" type="text" required="required" class="form-control form-control-[p]">
+                                <input @bind="Inquiry.Number" id="phone-number" name="phone-number" type="text" required="required" class="form-control form-control-sm">
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="form-group">
@@ -49,7 +54,7 @@
                                 <i class="fa fa-envelope"></i>
                             </div>
                         </div>
-                        <input @bind="Inquiry.Email" id="email" name="email" type="text" required="required" class="form-control form-control-sm">
+                        <input @bind="Inquiry.Email" id="email" name="email" type="email" required="required" class="form-control form-control-sm">
                     </div>
                 </div>
                 <hr/>
@@ -64,11 +69,7 @@
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="question-3" class="medium">More Monthly Deals?</label>
-                            <select @bind="Inquiry.AcceptsMonthlyDeals" id="question-3" name="question-3" class="custom-select custom-select-sm">
-                                <option disabled selected value> -- Select An Option -- </option>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
+                            <input type="checkbox" id="accepts-more-deals" @bind="Inquiry.AcceptsMonthlyDeals"/>
                             <small class="form-text text-muted">Are you okay with 10-12 more deals per month?</small>
                         </div>
                     </div>
@@ -85,11 +86,16 @@
                 </div>
                 <div class="form-group">
                     <label for="notes" class="medium">Notes</label>
-                    <textarea @bind="Inquiry.Notes" id="notes" name="notes" cols="40" rows="4" class="form-control form-control-sm"></textarea>
+                    <textarea @bind="Inquiry.Notes" id="notes" name="notes" cols="40" rows="3" class="form-control form-control-sm"></textarea>
                 </div>
                 <div class="form-group text-center">
                     <button name="submit" type="submit" class="btn btn-primary btn-sm w-100 fs-6">Submit</button>
                 </div>
+
+                @if (!IsSuccess)
+                {
+                    <p class="text-lead text-danger">Oops, something went wrong. Please refresh and try again.</p>
+                }
             </form>
         </div>
     </div>
