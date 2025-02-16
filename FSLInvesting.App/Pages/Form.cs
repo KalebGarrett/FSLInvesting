@@ -13,8 +13,6 @@ public partial class Form
 
     private async Task HandleForm()
     {
-        Console.WriteLine($"Notes submitted: {Inquiry.Notes}");
-
         var isSuccessStatusCode = await _inquiryService.Create(Inquiry);
         
         if (!isSuccessStatusCode)
