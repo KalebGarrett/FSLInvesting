@@ -9,8 +9,8 @@ public partial class Form
     [Inject] private InquiryService _inquiryService { get; set; }
     [Inject] NavigationManager _navigationManager { get; set; }
     private InquiryModel Inquiry { get; set; } = new();
-    private bool ShowErrorMessage { get; set; }
-    private bool ShowSuccessMessage { get; set; }
+    private bool IsError { get; set; }
+    private bool IsSuccessful { get; set; }
 
     private async Task HandleForm()
     {
@@ -18,11 +18,11 @@ public partial class Form
 
         if (!isSuccessStatusCode)
         {
-            ShowErrorMessage = true;
+            IsError = true;
             return;
         }
         
-        ShowSuccessMessage = true;
+        IsSuccessful = true;
         StateHasChanged();
         
         await Task.Delay(TimeSpan.FromSeconds(3));
