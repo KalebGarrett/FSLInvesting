@@ -9,18 +9,23 @@ public partial class Form
     [Inject] private InquiryService _inquiryService { get; set; }
     [Inject] NavigationManager _navigationManager { get; set; }
     private InquiryModel Inquiry { get; set; } = new();
-    private bool IsSuccess { get; set; } = true;
+    private bool ShowErrorMessage { get; set; }
+    private bool ShowSuccessMessage { get; set; }
 
     private async Task HandleForm()
     {
         var isSuccessStatusCode = await _inquiryService.Create(Inquiry);
-        
+
         if (!isSuccessStatusCode)
         {
-            IsSuccess = false;
+            ShowErrorMessage = true;
             return;
         }
         
-        _navigationManager.NavigateTo("/inquiry", true); 
-      }
+        ShowSuccessMessage = true;
+        StateHasChanged();
+        
+        await Task.Delay(TimeSpan.FromSeconds(3));
+        _navigationManager.NavigateTo("/inquiry", true);
+    }
 }

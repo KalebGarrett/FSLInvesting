@@ -14,7 +14,8 @@
         <div class="col-12 col-lg-5 d-none d-lg-block rounded-3 bg-form-img"></div>
         <div class="col-12 col-lg-7 rounded-3">
             <form @onsubmit="HandleForm" class="p-3 rounded-3" style="background-color: #FFFFFF;">
-                <img class="img-fluid mx-auto d-block" style="width: 250px" src="Images/FSL Logo.png" alt="FSL Investing"/>
+                <img class="img-fluid mx-auto d-block" style="width: 250px" src="Images/FSL Logo.png"
+                     alt="FSL Investing"/>
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="form-group">
@@ -25,7 +26,8 @@
                                         <i class="fa fa-address-card"></i>
                                     </div>
                                 </div>
-                                <input @bind="Inquiry.Name" id="name" name="name" type="text" required="required" class="form-control form-control-sm">
+                                <input @bind="Inquiry.Name" id="name" name="name" type="text" required="required"
+                                       class="form-control form-control-sm">
                             </div>
                         </div>
                     </div>
@@ -38,7 +40,8 @@
                                         <i class="fa fa-phone"></i>
                                     </div>
                                 </div>
-                                <input @bind="Inquiry.Number" id="phone-number" name="phone-number" type="text" required="required" class="form-control form-control-sm">
+                                <input @bind="Inquiry.Number" id="phone-number" name="phone-number" type="text"
+                                       required="required" class="form-control form-control-sm">
                             </div>
                         </div>
                     </div>
@@ -51,7 +54,8 @@
                                 <i class="fa fa-envelope"></i>
                             </div>
                         </div>
-                        <input @bind="Inquiry.Email" id="email" name="email" type="email" required="required" class="form-control form-control-sm">
+                        <input @bind="Inquiry.Email" id="email" name="email" type="email" required="required"
+                               class="form-control form-control-sm">
                     </div>
                 </div>
                 <hr/>
@@ -59,7 +63,8 @@
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="question-1" class="medium">Monthly Purchases?</label>
-                            <input @bind="Inquiry.MonthlyPurchases" id="question-1" name="question-1" type="number" required="required" class="form-control form-control-sm">
+                            <input @bind="Inquiry.MonthlyPurchases" id="question-1" name="question-1" type="number"
+                                   required="required" class="form-control form-control-sm">
                             <small class="form-text text-muted">How many properties do you buy per month?</small>
                         </div>
                     </div>
@@ -73,26 +78,40 @@
                 </div>
                 <div class="form-group">
                     <label for="question-2" class="medium">Target Areas?</label>
-                    <input @bind="Inquiry.TargetAreas" id="question-2" name="question-2" type="text" required="required" class="form-control form-control-sm">
+                    <input @bind="Inquiry.TargetAreas" id="question-2" name="question-2" type="text" required="required"
+                           class="form-control form-control-sm">
                     <small class="form-text text-muted">What counties or zip codes are you buying in?</small>
                 </div>
                 <div class="form-group">
                     <label for="question-4" class="medium">Buying Requirements?</label>
-                    <input @bind="Inquiry.BuyingRequirements" id="question-4" name="question-4" type="text" required="required" class="form-control form-control-sm">
+                    <input @bind="Inquiry.BuyingRequirements" id="question-4" name="question-4" type="text"
+                           required="required" class="form-control form-control-sm">
                     <small class="form-text text-muted">What are your requirements when buying a property?</small>
                 </div>
                 <div class="form-group">
                     <label for="notes" class="medium">Notes</label>
-                    <textarea @bind="Inquiry.Notes" id="notes" name="notes" cols="40" rows="3" class="form-control form-control-sm"></textarea>
+                    <textarea @bind="Inquiry.Notes" id="notes" name="notes" cols="40" rows="3"
+                              class="form-control form-control-sm"></textarea>
                 </div>
                 <div class="form-group text-center">
                     <button name="submit" type="submit" class="btn btn-primary btn-sm w-100 fs-6">Submit</button>
                 </div>
 
-                @if (!IsSuccess)
+                @if (ShowErrorMessage)
                 {
-                    <p class="text-lead text-danger">Oops, something went wrong. Please refresh and try again.</p>
+                    <div class="alert alert-danger" role="alert">
+                        Oops, something went wrong. Please refresh and try
+                        again.
+                    </div>
                 }
+
+                @if (ShowSuccessMessage)
+                {
+                    <div class="alert alert-success" role="alert">
+                        Your inquiry was submitted successfully!
+                    </div>   
+                }
+
             </form>
         </div>
     </div>
