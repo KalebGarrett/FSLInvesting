@@ -1,5 +1,6 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f4f4f4;
 }
 
 h1:focus {
@@ -116,4 +117,9 @@ video#background-video {
     background: url(../Images/Investing.png);
     background-size: cover;
     opacity: 95%;
+}
+
+.mud-link-item :hover {
+    color: #AA8020 !important;
+    font-weight: bold;
 }

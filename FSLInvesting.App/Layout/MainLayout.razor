@@ -1,13 +1,26 @@
-﻿<MudThemeProvider />
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider />
 <MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
-@inherits LayoutComponentBase
-<div class="page">
-    <main>
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+<MudLayout>
+    <MudAppBar Color="Color.Dark">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" /></MudAppBar>
+    <MudDrawer @bind-Open="@DrawerOpen">
+        <NavMenu/>
+    </MudDrawer>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    bool DrawerOpen { get; set; } = true;
+
+    void DrawerToggle()
+    {
+        DrawerOpen = !DrawerOpen;
+    }
+}
