@@ -1,6 +1,5 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color: #f4f4f4;
 }
 
 h1:focus {
@@ -122,4 +121,8 @@ video#background-video {
 .mud-link-item :hover {
     color: #AA8020 !important;
     font-weight: bold;
+}
+
+body {
+    background-color: #f4f4f4 !important;
 }

@@ -20,6 +20,9 @@
       <Compile Update="Pages\Form.cs">
         <DependentUpon>Form.razor</DependentUpon>
       </Compile>
+      <Compile Update="Pages\Leads.cs">
+        <DependentUpon>Leads.razor</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

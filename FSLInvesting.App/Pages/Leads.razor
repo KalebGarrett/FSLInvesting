@@ -1,0 +1,56 @@
+@page "/leads"
+@using FSLInvesting.Models
+
+<PageTitle>Leads</PageTitle>
+
+<MudTable Items="@Inquiries" Dense="@Dense" Hover="@Hover" Bordered="@Bordered" Striped="@Striped" Filter="new Func<InquiryModel,bool>(FilterFunc)" @bind-SelectedItem="SelectedItem">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Form Inquiries</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="SearchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Created At</MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Number</MudTh>
+        <MudTh>Email</MudTh>
+        <MudTh>Monthly Purchases</MudTh>
+        <MudTh>More Monthly Deals</MudTh>
+        <MudTh>Target Areas</MudTh>
+        <MudTh>Buying Requirements</MudTh>
+        <MudTh>Notes</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Created At">@context.CreatedAt.ToLocalTime()</MudTd>
+        <MudTd DataLabel="Name">@context.Id</MudTd>
+        <MudTd DataLabel="Number">@context.Number</MudTd>
+        <MudTd DataLabel="Email">@context.Email</MudTd>
+        <MudTd DataLabel="Monthly Purchases">@context.MonthlyPurchases</MudTd>
+        @if (context.AcceptsMonthlyDeals)
+        {
+            <MudTd DataLabel="More Monthly Deals">Yes</MudTd>   
+        }
+        else
+        {
+            <MudTd DataLabel="More Monthly Deals">No</MudTd>   
+        }
+        <MudTd DataLabel="Target Areas">@context.TargetAreas</MudTd>
+        <MudTd DataLabel="Buying Requirements">@context.BuyingRequirements</MudTd>
+        <MudTd DataLabel="Notes">@context.Notes</MudTd>
+        <!-- Put ID here for delete button -->
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+<div class="d-flex flex-wrap mt-4">
+    <MudSwitch @bind-Value="Hover" Color="Color.Inherit">Hover</MudSwitch>
+    <MudSwitch @bind-Value="Dense" Color="Color.Inherit">Dense</MudSwitch>
+    <MudSwitch @bind-Value="Striped" Color="Color.Inherit">Striped</MudSwitch>
+    <MudSwitch @bind-Value="Bordered" Color="Color.Inherit">Bordered</MudSwitch>
+    <MudSpacer />
+    <div style="min-width:200px;">
+        <MudText Class="align-self-center d-inline">Selected: @SelectedItem?.Name</MudText>
+    </div>
+</div>
