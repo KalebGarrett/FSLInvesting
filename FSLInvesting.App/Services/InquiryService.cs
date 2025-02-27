@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Text;
 using System.Text.Json;
 using FSLInvesting.Models;
 
@@ -34,11 +35,18 @@ public class InquiryService
 
         var result = await _client.GetAsync("Inquiries");
 
-        if (!result.IsSuccessStatusCode) return new List<InquiryModel>();
+        if (!result.IsSuccessStatusCode)
+        {
+            return new List<InquiryModel>();
+        }
 
+        if (result.StatusCode != HttpStatusCode.NoContent)
+        {
+            return new List<InquiryModel>();
+        }
+        
         var json = await result.Content.ReadAsStringAsync();
-        return JsonSerializer.Deserialize<List<InquiryModel>>(json);
-    }
+        return JsonSerializer.Deserialize<List<InquiryModel>>(json); }
 
     public async Task Delete(string id)
     {

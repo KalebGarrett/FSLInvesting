@@ -100,17 +100,12 @@
 
                 @if (IsError)
                 {
-                    <div class="alert alert-danger" role="alert">
-                        Oops, something went wrong. Please refresh and try
-                        again.
-                    </div>
+                    _snackbar.Add("Oops, something went wrong. Please refresh and try again.", Severity.Error);
                 }
 
                 @if (IsSuccessful)
                 {
-                    <div class="alert alert-success" role="alert">
-                        Your inquiry was submitted successfully!
-                    </div>
+                    _snackbar.Add("Your inquiry was submitted successfully!", Severity.Success);
                 }
             </form>
         </div>

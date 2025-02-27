@@ -1,6 +1,8 @@
 ﻿using FSLInvesting.App.Services;
 using FSLInvesting.Models;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using MudBlazor;
 
 namespace FSLInvesting.App.Pages;
 
@@ -8,6 +10,7 @@ public partial class Form
 {
     [Inject] private InquiryService _inquiryService { get; set; }
     [Inject] NavigationManager _navigationManager { get; set; }
+    [Inject] ISnackbar _snackbar { get; set; }
     private InquiryModel Inquiry { get; set; } = new();
     private bool IsError { get; set; }
     private bool IsSuccessful { get; set; }
