@@ -12,8 +12,12 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient {BaseAddress = new Uri("https://fslinvestingapi.azurewebsites.net/index.html")});
 builder.Services.AddScoped<InquiryService>();
 
-builder.Services.AddScoped<ISnackbar>();
+builder.Services.AddScoped<Snackbar>();
 
-builder.Services.AddMudServices();
+builder.Services.AddMudServices(c =>
+{
+    c.SnackbarConfiguration.PreventDuplicates = false;
+    c.SnackbarConfiguration.MaxDisplayedSnackbars = 5;
+});
 
 await builder.Build().RunAsync();

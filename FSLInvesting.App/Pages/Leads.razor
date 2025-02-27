@@ -42,7 +42,10 @@
             <MudTd DataLabel="Target Areas">@context.TargetAreas</MudTd>
             <MudTd DataLabel="Buying Requirements">@context.BuyingRequirements</MudTd>
             <MudTd DataLabel="Notes">@context.Notes</MudTd>
-            <MudTd DataLabel="Delete Button"><MudIconButton @onclick="() => Delete(context.Id)" ButtonType="ButtonType.Button" Icon="@Icons.Material.Filled.Delete" Color="Color.Error"></MudIconButton></MudTd>
+            <MudTd DataLabel="Delete Button">
+                <MudIconButton @onclick="() => Delete(context.Id)" ButtonType="ButtonType.Button"
+                               Icon="@Icons.Material.Filled.Delete" Color="Color.Error"></MudIconButton>
+            </MudTd>
         </RowTemplate>
         <PagerContent>
             <MudTablePager/>
