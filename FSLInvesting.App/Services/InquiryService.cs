@@ -40,7 +40,7 @@ public class InquiryService
             return new List<InquiryModel>();
         }
 
-        if (result.StatusCode != HttpStatusCode.NoContent)
+        if (result.StatusCode == HttpStatusCode.NoContent)
         {
             return new List<InquiryModel>();
         }
