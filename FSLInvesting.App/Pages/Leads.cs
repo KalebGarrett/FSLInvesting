@@ -1,12 +1,14 @@
 using FSLInvesting.App.Services;
 using FSLInvesting.Models;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 
 namespace FSLInvesting.App.Pages;
 
 public partial class Leads
 {
     [Inject] private InquiryService _inquiryService { get; set; }
+    [Inject] private ISnackbar _snackbar { get; set; }
     private bool Dense { get; set; }
     private bool Hover { get; set; } = true;
     private bool Striped { get; set; } = true;
@@ -39,5 +41,6 @@ public partial class Leads
     {
         await _inquiryService.Delete(id);
         Inquiries = await _inquiryService.Get();
+        _snackbar.Add("Inquiry has been deleted successfully!", Severity.Success);
     }
 }
