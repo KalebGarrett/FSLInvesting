@@ -14,7 +14,7 @@ public partial class Leads
     private string SearchString { get; set; } = "";
     private InquiryModel SelectedItem { get; set; }
     private List<InquiryModel> Inquiries { get; set; } = new();
-
+    
     protected override async Task OnInitializedAsync()
     {
         Inquiries = await _inquiryService.Get();
@@ -33,5 +33,11 @@ public partial class Leads
         if (inquiry.Email.Contains(searchString, StringComparison.OrdinalIgnoreCase))
             return true;
         return false;
+    }
+
+    private async Task Delete(string id)
+    {
+        await _inquiryService.Delete(id);
+        Inquiries = await _inquiryService.Get();
     }
 }

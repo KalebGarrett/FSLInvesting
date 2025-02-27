@@ -17,22 +17,33 @@ public class InquiryService
 
     public async Task<bool> Create(InquiryModel inquiry)
     {
+        _client.DefaultRequestHeaders.Clear();
         _client.DefaultRequestHeaders.Add(Header, ApiKey);
+
         var json = JsonSerializer.Serialize(inquiry);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
         var result = await _client.PostAsync("Inquiry", content);
-        
+
         return result.IsSuccessStatusCode;
     }
 
     public async Task<List<InquiryModel>> Get()
     {
+        _client.DefaultRequestHeaders.Clear();
         _client.DefaultRequestHeaders.Add(Header, ApiKey);
+
         var result = await _client.GetAsync("Inquiries");
 
         if (!result.IsSuccessStatusCode) return new List<InquiryModel>();
 
         var json = await result.Content.ReadAsStringAsync();
         return JsonSerializer.Deserialize<List<InquiryModel>>(json);
+    }
+
+    public async Task Delete(string id)
+    {
+        _client.DefaultRequestHeaders.Clear();
+        _client.DefaultRequestHeaders.Add(Header, ApiKey);
+        await _client.DeleteAsync($"Inquiry/{id}");
     }
 }
