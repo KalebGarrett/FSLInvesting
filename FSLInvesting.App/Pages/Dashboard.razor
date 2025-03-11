@@ -1,0 +1,35 @@
+﻿@page "/dashboard"
+
+<PageTitle>Dashboard</PageTitle>
+
+<div class="container-fluid mt-4 mb-4">
+    <div class="row gy-2">
+        <div class="col-lg-6 col-12 ">
+            <MudPaper Class="pa-4">
+                <MudChart
+                    ChartOptions="@(new() { ChartPalette = ["#2979ff", "#1de9b6", "#eb093a"] })"
+                    ChartType="ChartType.Donut" Width="300px" Height="300px" LegendPosition="@LegendPosition"
+                    InputData="@Data" InputLabels="@Labels">
+                    <CustomGraphics>
+                        <text class="donut-inner-text fw-bold" x="50%" y="50%" dominant-baseline="middle"
+                              text-anchor="middle"
+                              fill="black" font-size="3">Total: @Data.Sum().ToString()
+                        </text>
+                    </CustomGraphics>
+                </MudChart>
+            </MudPaper>
+            <MudPaper Class="pa-4 mt-2">
+                <MudSelect Label="Legend Position" Variant="Variant.Filled" Dense="true"
+                           T="Position" @bind-Value="LegendPosition" Class="mt-4">
+                    <MudSelectItem T="Position" Value="Position.Top">Top</MudSelectItem>
+                    <MudSelectItem T="Position" Value="Position.Left">Left</MudSelectItem>
+                    <MudSelectItem T="Position" Value="Position.Right">Right</MudSelectItem>
+                    <MudSelectItem T="Position" Value="Position.Bottom">Bottom</MudSelectItem>
+                </MudSelect>
+            </MudPaper>
+        </div>
+        <div class="col-lg-6 col-12">
+
+        </div>
+    </div>
+</div>
