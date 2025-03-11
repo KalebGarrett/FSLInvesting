@@ -3,23 +3,26 @@
 <PageTitle>Dashboard</PageTitle>
 
 <div class="container-fluid mt-4 mb-4">
-    <div class="row gy-2">
+    <div class="row gy-3">
         <div class="col-lg-6 col-12 ">
             <MudPaper Class="pa-4">
+                <MudText Class="text-black fw-bold" Typo="Typo.h4">
+                    <MudIcon Icon="@Icons.Material.Filled.Leaderboard"></MudIcon>
+                    Lead Count
+                </MudText>
                 <MudChart
                     ChartOptions="@(new() { ChartPalette = ["#2979ff", "#1de9b6", "#eb093a"] })"
                     ChartType="ChartType.Donut" Width="300px" Height="300px" LegendPosition="@LegendPosition"
-                    InputData="@Data" InputLabels="@Labels">
+                    InputData="@Data" InputLabels="@Labels" Class="mt-2">
                     <CustomGraphics>
                         <text class="donut-inner-text fw-bold" x="50%" y="50%" dominant-baseline="middle"
                               text-anchor="middle"
-                              fill="black" font-size="3">Total: @Data.Sum().ToString()
+                              fill="black" font-size="6">Total: @Data.Sum().ToString()
                         </text>
                     </CustomGraphics>
                 </MudChart>
-            </MudPaper>
-            <MudPaper Class="pa-4 mt-2">
-                <MudSelect Label="Legend Position" Variant="Variant.Filled" Dense="true"
+
+                <MudSelect Label="Legend Position" Variant="Variant.Outlined" Dense="true"
                            T="Position" @bind-Value="LegendPosition" Class="mt-4">
                     <MudSelectItem T="Position" Value="Position.Top">Top</MudSelectItem>
                     <MudSelectItem T="Position" Value="Position.Left">Left</MudSelectItem>
@@ -28,8 +31,47 @@
                 </MudSelect>
             </MudPaper>
         </div>
-        <div class="col-lg-6 col-12">
+    </div>
+</div>
 
+<div class="container-fluid mt-4 mb-4">
+    <div class="row gy-3">
+        <div class="col-lg-6 col-12 gy-3">
+            <div class="row gy-3">
+                <div class="col-lg-6 col-12 ">
+                    <MudPaper Class="pa-4">
+                        <MudText Class="text-black fw-bold" Typo="Typo.h5">
+                            <MudIcon Icon="@Icons.Material.Filled.AutoGraph"></MudIcon>
+                            Average Monthly Purchases
+                        </MudText>
+                        @if (MonthlyPropertyPurchases.Count == 0 || MonthlyPropertyPurchases == null)
+                        {
+                            <MudText Class="text-center fw-bold" Typo="Typo.h1">0</MudText>
+                        }
+                        else
+                        {
+                            if (AverageMonthlyPropertyPurchases() <= 2)
+                            {
+                                <MudText Style="color: #2979ff" Class="text-center fw-bold"
+                                         Typo="Typo.h1">@Math.Round(MonthlyPropertyPurchases.Average())</MudText>
+                            }
+                            else if (AverageMonthlyPropertyPurchases() is > 2 and <= 5)
+                            {
+                                <MudText Style="color: #1de9b6" Class="text-center fw-bold"
+                                         Typo="Typo.h1">@Math.Round(MonthlyPropertyPurchases.Average())</MudText>
+                            }
+                            else
+                            {
+                                <MudText Style="color: #eb093a" Class="text-center fw-bold"
+                                         Typo="Typo.h1">@Math.Round(MonthlyPropertyPurchases.Average())</MudText>
+                            }
+                        }
+                    </MudPaper>
+                </div>
+                <div class="col-lg-6 col-12 ">
+
+                </div>
+            </div>
         </div>
     </div>
 </div>

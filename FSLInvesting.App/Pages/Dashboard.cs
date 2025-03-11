@@ -15,18 +15,20 @@ public partial class Dashboard
     private static double BlueLeads { get; set; }
     private static double GreenLeads { get; set; }
     private static double RedLeads { get; set; }
-    
+    private List<double> MonthlyPropertyPurchases { get; set; } = new() { 0 };
+
     protected override async Task OnInitializedAsync()
     {
         BlueLeads = 0;
         GreenLeads = 0;
         RedLeads = 0;
-        await SortLeads();
+        Inquiries = await _inquiryService.Get();
+        SortLeads();
     }
 
-    private async Task SortLeads()
+    private void SortLeads()
     {
-        Inquiries = await _inquiryService.Get();
+        MonthlyPropertyPurchases.Clear();
 
         foreach (var inquiry in Inquiries)
         {
@@ -42,6 +44,8 @@ public partial class Dashboard
             {
                 RedLeads++;
             }
+
+            MonthlyPropertyPurchases.Add(inquiry.MonthlyPurchases);
         }
 
         Labels =
@@ -52,5 +56,10 @@ public partial class Dashboard
         ];
 
         Data = [BlueLeads, GreenLeads, RedLeads];
+    }
+
+    private double AverageMonthlyPropertyPurchases()
+    {
+        return MonthlyPropertyPurchases.Average();
     }
 }
