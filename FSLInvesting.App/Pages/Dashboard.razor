@@ -44,7 +44,7 @@
                             <MudIcon Icon="@Icons.Material.Filled.AutoGraph"></MudIcon>
                             Average Monthly Purchases
                         </MudText>
-                        @if (MonthlyPropertyPurchases.Count == 0 || MonthlyPropertyPurchases == null)
+                        @if (Inquiries.Count == 0 || Inquiries == null)
                         {
                             <MudText Class="text-center fw-bold" Typo="Typo.h1">0</MudText>
                         }
@@ -69,7 +69,20 @@
                     </MudPaper>
                 </div>
                 <div class="col-lg-6 col-12 ">
-
+                    <MudPaper Class="pa-4">
+                        <MudText Class="text-black fw-bold" Typo="Typo.h5">
+                            <MudIcon Icon="@Icons.Material.Filled.Handshake"></MudIcon>
+                            Accepts More Deals
+                        </MudText>
+                        @if (Inquiries.Count == 0 || Inquiries == null)
+                        {
+                            <MudText Class="text-center fw-bold" Typo="Typo.h1">0</MudText>
+                        }
+                        else
+                        {
+                            <MudText Class="text-center fw-bold text-black" Typo="Typo.h1">@AcceptsMoreMonthlyDeals.Count/@Inquiries.Count</MudText>   
+                        }
+                    </MudPaper>
                 </div>
             </div>
         </div>

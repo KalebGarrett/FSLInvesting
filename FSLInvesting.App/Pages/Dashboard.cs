@@ -16,6 +16,7 @@ public partial class Dashboard
     private static double GreenLeads { get; set; }
     private static double RedLeads { get; set; }
     private List<double> MonthlyPropertyPurchases { get; set; } = new() { 0 };
+    private List<bool> AcceptsMoreMonthlyDeals { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -45,6 +46,10 @@ public partial class Dashboard
                 RedLeads++;
             }
 
+            if (inquiry.AcceptsMonthlyDeals)
+            {
+                AcceptsMoreMonthlyDeals.Add(inquiry.AcceptsMonthlyDeals);
+            }
             MonthlyPropertyPurchases.Add(inquiry.MonthlyPurchases);
         }
 
