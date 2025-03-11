@@ -9,13 +9,14 @@ public partial class Dashboard
 {
     [Inject] private InquiryService _inquiryService { get; set; }
     private List<InquiryModel> Inquiries { get; set; } = new();
-    private double[] Data { get; set; } = [];
     private string[] Labels { get; set; } = [];
     private Position LegendPosition { get; set; } = Position.Right;
+    private double[] Data { get; set; } = [];
     private static double BlueLeads { get; set; }
     private static double GreenLeads { get; set; }
     private static double RedLeads { get; set; }
     private List<double> MonthlyPropertyPurchases { get; set; } = new() { 0 };
+    private double AvgMonthlyPurchases { get; set; }
     private List<bool> AcceptsMoreMonthlyDeals { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
@@ -50,7 +51,9 @@ public partial class Dashboard
             {
                 AcceptsMoreMonthlyDeals.Add(inquiry.AcceptsMonthlyDeals);
             }
+
             MonthlyPropertyPurchases.Add(inquiry.MonthlyPurchases);
+            AvgMonthlyPurchases = MonthlyPropertyPurchases.Average();
         }
 
         Labels =
@@ -61,10 +64,5 @@ public partial class Dashboard
         ];
 
         Data = [BlueLeads, GreenLeads, RedLeads];
-    }
-
-    private double AverageMonthlyPropertyPurchases()
-    {
-        return MonthlyPropertyPurchases.Average();
     }
 }

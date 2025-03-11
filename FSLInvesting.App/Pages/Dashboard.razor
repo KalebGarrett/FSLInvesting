@@ -21,7 +21,6 @@
                         </text>
                     </CustomGraphics>
                 </MudChart>
-
                 <MudSelect Label="Legend Position" Variant="Variant.Outlined" Dense="true"
                            T="Position" @bind-Value="LegendPosition" Class="mt-4">
                     <MudSelectItem T="Position" Value="Position.Top">Top</MudSelectItem>
@@ -46,19 +45,19 @@
                         </MudText>
                         @if (Inquiries.Count == 0 || Inquiries == null)
                         {
-                            <MudText Class="text-center fw-bold" Typo="Typo.h1">0</MudText>
+                            <MudText Class="text-center fw-bold text-black" Typo="Typo.h2">0</MudText>
                         }
                         else
                         {
-                            if (AverageMonthlyPropertyPurchases() <= 2)
+                            if (AvgMonthlyPurchases <= 2)
                             {
                                 <MudText Style="color: #2979ff" Class="text-center fw-bold"
                                          Typo="Typo.h1">@Math.Round(MonthlyPropertyPurchases.Average())</MudText>
                             }
-                            else if (AverageMonthlyPropertyPurchases() is > 2 and <= 5)
+                            else if (AvgMonthlyPurchases is > 2 and <= 5)
                             {
                                 <MudText Style="color: #1de9b6" Class="text-center fw-bold"
-                                         Typo="Typo.h1">@Math.Round(MonthlyPropertyPurchases.Average())</MudText>
+                                         Typo="Typo.h2">@Math.Round(MonthlyPropertyPurchases.Average())</MudText>
                             }
                             else
                             {
@@ -74,14 +73,8 @@
                             <MudIcon Icon="@Icons.Material.Filled.Handshake"></MudIcon>
                             Accepts More Deals
                         </MudText>
-                        @if (Inquiries.Count == 0 || Inquiries == null)
-                        {
-                            <MudText Class="text-center fw-bold" Typo="Typo.h1">0</MudText>
-                        }
-                        else
-                        {
-                            <MudText Class="text-center fw-bold text-black" Typo="Typo.h1">@AcceptsMoreMonthlyDeals.Count/@Inquiries.Count</MudText>   
-                        }
+                        <MudText Class="text-center fw-bold text-black"
+                                 Typo="Typo.h2">@AcceptsMoreMonthlyDeals.Count/@Inquiries.Count</MudText>
                     </MudPaper>
                 </div>
             </div>
