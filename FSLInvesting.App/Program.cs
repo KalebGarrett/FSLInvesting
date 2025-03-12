@@ -13,6 +13,7 @@ builder.Services.AddScoped(sp => new HttpClient {BaseAddress = new Uri("https://
 builder.Services.AddScoped<InquiryService>();
 
 builder.Services.AddScoped<Snackbar>();
+builder.Services.AddScoped<DialogService>();
 
 builder.Services.AddMudServices(c =>
 {
