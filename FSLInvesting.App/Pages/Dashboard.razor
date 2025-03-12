@@ -52,7 +52,7 @@
                             if (AvgMonthlyPurchases <= 2)
                             {
                                 <MudText Style="color: #2979ff" Class="text-center fw-bold"
-                                         Typo="Typo.h1">@Math.Round(MonthlyPropertyPurchases.Average())</MudText>
+                                         Typo="Typo.h2 ">@Math.Round(MonthlyPropertyPurchases.Average())</MudText>
                             }
                             else if (AvgMonthlyPurchases is > 2 and <= 5)
                             {
@@ -62,7 +62,7 @@
                             else
                             {
                                 <MudText Style="color: #eb093a" Class="text-center fw-bold"
-                                         Typo="Typo.h1">@Math.Round(MonthlyPropertyPurchases.Average())</MudText>
+                                         Typo="Typo.h2">@Math.Round(MonthlyPropertyPurchases.Average())</MudText>
                             }
                         }
                     </MudPaper>
