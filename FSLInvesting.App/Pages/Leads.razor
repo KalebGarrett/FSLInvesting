@@ -8,6 +8,7 @@
               Filter="new Func<InquiryModel,bool>(FilterFunc)" @bind-SelectedItem="SelectedItem">
         <ToolBarContent>
             <MudText Typo="Typo.h6">Form Inquiries</MudText>
+            <MudIconButton Class="ml-2" Icon="@Icons.Material.Filled.Download" OnClick="DownloadCsv"></MudIconButton>
             <MudSpacer/>
             <MudTextField @bind-Value="SearchString" Placeholder="Search" Adornment="Adornment.Start"
                           AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium"

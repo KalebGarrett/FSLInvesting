@@ -1,3 +1,5 @@
+using System.Globalization;
+using CsvHelper;
 using FSLInvesting.App.Pages.Components;
 using FSLInvesting.App.Services;
 using FSLInvesting.Models;
@@ -10,6 +12,7 @@ public partial class Leads
 {
     [Inject] private InquiryService InquiryService { get; set; }
     [Inject] private IDialogService Dialog { get; set; }
+    [Inject] NavigationManager NavigationManager { get; set; }
     private bool Dense { get; set; }
     private bool Hover { get; set; } = true;
     private bool Striped { get; set; } = true;
@@ -17,12 +20,12 @@ public partial class Leads
     private string SearchString { get; set; } = "";
     private InquiryModel SelectedItem { get; set; }
     private List<InquiryModel> Inquiries { get; set; } = new();
-    
+
     protected override async Task OnInitializedAsync()
     {
         Inquiries = await InquiryService.Get();
     }
-    
+
     private bool FilterFunc(InquiryModel inquiry) => FilterFunc(inquiry, SearchString);
 
     private bool FilterFunc(InquiryModel inquiry, string searchString)
@@ -45,17 +48,36 @@ public partial class Leads
             { x => x.ContentText, "Do you really want to delete this inquiry? This process cannot be undone." },
             { x => x.ButtonText, "Delete" },
             { x => x.Color, Color.Error },
-            { x => x.Id, id}
+            { x => x.Id, id }
         };
 
-        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall};
+        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
 
         var dialog = await Dialog.ShowAsync<DeleteInquiryDialog>("Delete Inquiry", parameters, options);
         var result = await dialog.Result;
-        
+
         if (!result!.Canceled)
         {
             Inquiries = await InquiryService.Get();
         }
+    }
+
+    private async Task DownloadCsv()
+    {
+        var memoryStream = new MemoryStream();
+        var writer = new StreamWriter(memoryStream);
+        var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
+        
+        await csv.WriteRecordsAsync(Inquiries);
+        await writer.FlushAsync();
+        memoryStream.Position = 0;
+
+        var fileBytes = memoryStream.ToArray();
+        var mimeType = "text/csv";
+
+        var base64 = Convert.ToBase64String(fileBytes);
+        var fileUrl = $"data:{mimeType};base64,{base64}";
+
+        NavigationManager.NavigateTo(fileUrl, true);
     }
 }
