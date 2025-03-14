@@ -6,22 +6,22 @@
 <MudSnackbarProvider/>
 
 <MudLayout Class="d-flex flex-column min-vh-100">
-    <MudAppBar Class="bg-white">
+    <MudAppBar Class="bg-black">
         <MudHidden Breakpoint="Breakpoint.SmAndDown">
             @if (DrawerOpen)
             {
-                <MudIconButton Icon="@Icons.Material.Filled.ArrowBackIos" Color="Color.Dark" Edge="Edge.Start"
+                <MudIconButton Icon="@Icons.Material.Filled.ArrowBackIos" Class="text-white" Edge="Edge.Start"
                                OnClick="@((e) => DrawerToggle())"/>
             }
             else
             {
-                <MudIconButton Icon="@Icons.Material.Filled.ArrowForwardIos" Color="Color.Dark" Edge="Edge.Start"
+                <MudIconButton Icon="@Icons.Material.Filled.ArrowForwardIos" Class="text-white" Edge="Edge.Start"
                                OnClick="@((e) => DrawerToggle())"/>
             }
         </MudHidden>
         <MudHidden Breakpoint="Breakpoint.MdAndUp">
-            <MudIconButton Class="visible-md d-flex justify-content-end" Icon="@Icons.Material.Filled.Menu"
-                           Color="Color.Dark" OnClick="@((e) => DrawerToggle())"/>
+            <MudIconButton Class="visible-md d-flex justify-content-end text-white" Icon="@Icons.Material.Filled.Menu"
+                            OnClick="@((e) => DrawerToggle())"/>
         </MudHidden>
     </MudAppBar>
     <MudDrawer @bind-Open="@DrawerOpen">
@@ -30,9 +30,7 @@
     <MudMainContent>
         @Body
     </MudMainContent>
-    <MudAppBar Class="bg-white text-center" Bottom="true" Fixed="false">
-        <MudText Color="Color.Dark" Class="col-12">Copyright &copy; @CurrentYear FSL Investing</MudText>
-    </MudAppBar>
+    <MudText Class="text-center mb-3">Copyright &copy; @CurrentYear FSL Investing</MudText>
 </MudLayout>
 
 @code {
