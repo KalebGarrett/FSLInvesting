@@ -18,7 +18,6 @@ public partial class Leads
     private bool Striped { get; set; } = true;
     private bool Bordered { get; set; }
     private string SearchString { get; set; } = "";
-    private InquiryModel SelectedItem { get; set; }
     private List<InquiryModel> Inquiries { get; set; } = new();
 
     protected override async Task OnInitializedAsync()

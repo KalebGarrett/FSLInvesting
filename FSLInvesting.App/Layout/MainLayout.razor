@@ -1,25 +1,27 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider />
-<MudPopoverProvider />
-<MudDialogProvider />
-<MudSnackbarProvider />
+<MudThemeProvider/>
+<MudPopoverProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
 
-<MudLayout>
-    <MudAppBar Color="Color.Dark">
+<MudLayout Class="d-flex flex-column min-vh-100">
+    <MudAppBar Class="bg-white">
         <MudHidden Breakpoint="Breakpoint.SmAndDown">
             @if (DrawerOpen)
             {
-                <MudIconButton Icon="@Icons.Material.Filled.ArrowBackIos" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
+                <MudIconButton Icon="@Icons.Material.Filled.ArrowBackIos" Color="Color.Dark" Edge="Edge.Start"
+                               OnClick="@((e) => DrawerToggle())"/>
             }
             else
             {
-                <MudIconButton Icon="@Icons.Material.Filled.ArrowForwardIos" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
+                <MudIconButton Icon="@Icons.Material.Filled.ArrowForwardIos" Color="Color.Dark" Edge="Edge.Start"
+                               OnClick="@((e) => DrawerToggle())"/>
             }
         </MudHidden>
-       
         <MudHidden Breakpoint="Breakpoint.MdAndUp">
-            <MudIconButton Class="visible-md d-flex justify-content-end" Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" OnClick="@((e) => DrawerToggle())"/>
+            <MudIconButton Class="visible-md d-flex justify-content-end" Icon="@Icons.Material.Filled.Menu"
+                           Color="Color.Dark" OnClick="@((e) => DrawerToggle())"/>
         </MudHidden>
     </MudAppBar>
     <MudDrawer @bind-Open="@DrawerOpen">
@@ -28,9 +30,13 @@
     <MudMainContent>
         @Body
     </MudMainContent>
+    <MudAppBar Class="bg-white text-center" Bottom="true" Fixed="false">
+        <MudText Color="Color.Dark" Class="col-12">Copyright &copy; @CurrentYear FSL Investing</MudText>
+    </MudAppBar>
 </MudLayout>
 
 @code {
+    private int CurrentYear { get; } = DateTime.UtcNow.ToLocalTime().Year;
     bool DrawerOpen { get; set; } = true;
 
     void DrawerToggle()
