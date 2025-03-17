@@ -1,7 +1,6 @@
 ﻿using FSLInvesting.App.Services;
 using FSLInvesting.Models;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using MudBlazor;
 
 namespace FSLInvesting.App.Pages;
@@ -14,6 +13,7 @@ public partial class Form
     private InquiryModel Inquiry { get; set; } = new();
     private bool IsError { get; set; }
     private bool IsSuccessful { get; set; }
+    private int CurrentYear { get; } = DateTime.UtcNow.ToLocalTime().Year;
 
     private async Task HandleForm()
     {
@@ -24,10 +24,10 @@ public partial class Form
             IsError = true;
             return;
         }
-        
+
         IsSuccessful = true;
         StateHasChanged();
-        
+
         await Task.Delay(TimeSpan.FromSeconds(3));
         _navigationManager.NavigateTo("/inquiry", true);
     }
