@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider/>
+<MudThemeProvider Theme="_currentTheme"/>
 <MudPopoverProvider/>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
@@ -58,7 +58,15 @@
 @code {
     private int CurrentYear { get; } = DateTime.UtcNow.ToLocalTime().Year;
     private bool DrawerOpen { get; set; } = true;
-
+    
+    private readonly MudTheme _currentTheme = new()
+    {
+        PaletteLight = new PaletteLight
+        {
+            Primary = "#AA8020",
+        }
+    };
+    
     void DrawerToggle()
     {
         DrawerOpen = !DrawerOpen;
