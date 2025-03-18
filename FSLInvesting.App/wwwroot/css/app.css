@@ -126,3 +126,18 @@ video#background-video {
 body {
     background-color: #f4f4f4 !important;
 }
+
+.btn-primary, .btn-primary:visited {
+    background-color: #AA8020 !important;
+    border-color: #AA8020 !important;
+}
+
+.btn-primary:hover {
+    background-color: #BB9025 !important;
+    border-color: #BB9025 !important;
+}
+
+.btn-primary:active {
+    background-color: #996A1A !important; 
+    border-color: #996A1A !important;
+}
