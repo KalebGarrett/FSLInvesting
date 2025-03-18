@@ -1,0 +1,85 @@
+@page "/login"
+@using FSLInvesting.Models
+@using FSLInvesting.App.Services
+@layout NoMenuLayout
+
+<PageTitle>Login</PageTitle>
+
+<!-- Add a nice background -->
+<div class="container justify-content-center mt-5 mb-3">
+    <div class="row no-gutters">
+        <div class="col-12 col-lg-5 d-none d-lg-block rounded-3 bg-form-img"></div>
+        <div class="col-12 col-lg-7 rounded-3">
+            <form @onsubmit="HandleForm" class="p-3 rounded-3" style="background-color: #FFFFFF;">
+                <img class="img-fluid mx-auto d-block" style="width: 250px" src="Images/FSL Logo.png"
+                     alt="FSL Investing"/>
+                <div class="form-group">
+                    <label for="email" class="medium">Email Address</label>
+                    <div class="input-group input-group-md">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                        </div>
+                        <input @bind="Inquiry.Email" id="email" name="email" type="email" required="required"
+                               class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="medium">Password</label>
+                    <div class="input-group input-group-md">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-lock"></i>
+                            </div>
+                        </div>
+                        <input @bind="Inquiry.Email" id="email" name="email" type="email" required="required"
+                               class="form-control form-control-sm">
+                    </div>
+                </div>
+                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Login" Color="Color.Info">Login
+                </MudButton>
+
+                <MudText Color="Color.Dark" Class="col-12 mt-2 text-center">Copyright &copy; @CurrentYear FSL
+                    Investing
+                </MudText>
+                @if (IsError)
+                {
+                    _snackbar.Add("Oops, something went wrong. Please refresh and try again.", Severity.Error);
+                }
+                @if (IsSuccessful)
+                {
+                    _snackbar.Add("Your inquiry was submitted successfully!", Severity.Success);
+                }
+            </form>
+        </div>
+    </div>
+</div>
+
+@code
+{
+    [Inject] private InquiryService _inquiryService { get; set; }
+    [Inject] NavigationManager _navigationManager { get; set; }
+    [Inject] ISnackbar _snackbar { get; set; }
+    private InquiryModel Inquiry { get; set; } = new();
+    private bool IsError { get; set; }
+    private bool IsSuccessful { get; set; }
+    private int CurrentYear { get; } = DateTime.UtcNow.ToLocalTime().Year;
+
+    private async Task HandleForm()
+    {
+        var isSuccessStatusCode = await _inquiryService.Create(Inquiry);
+
+        if (!isSuccessStatusCode)
+        {
+            IsError = true;
+            return;
+        }
+
+        IsSuccessful = true;
+        StateHasChanged();
+
+        await Task.Delay(TimeSpan.FromSeconds(3));
+        _navigationManager.NavigateTo("/inquiry", true);
+    }
+}
