@@ -1,0 +1,20 @@
+@inherits LayoutComponentBase
+
+<MudThemeProvider/>
+<MudPopoverProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+
+<MudLayout Class="d-flex flex-column min-vh-100">
+    <MudAppBar Class="bg-black">
+    </MudAppBar>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+    <MudText Class="text-center mb-3">Copyright &copy; @CurrentYear FSL Investing</MudText>
+</MudLayout>
+
+@code {
+    private int CurrentYear { get; } = DateTime.UtcNow.ToLocalTime().Year;
+
+}

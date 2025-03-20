@@ -5,71 +5,63 @@
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 
-<MudLayout Class="d-flex flex-column min-vh-100">
-    <MudAppBar Class="bg-black">
-        <MudHidden Breakpoint="Breakpoint.SmAndDown">
-            @if (DrawerOpen)
-            {
-                <MudIconButton Icon="@Icons.Material.Filled.ArrowBackIos" Class="text-white" Edge="Edge.Start"
-                               OnClick="@((e) => DrawerToggle())"/>
-            }
-            else
-            {
-                <MudIconButton Icon="@Icons.Material.Filled.ArrowForwardIos" Class="text-white" Edge="Edge.Start"
-                               OnClick="@((e) => DrawerToggle())"/>
-            }
-        </MudHidden>
-        <MudHidden Breakpoint="Breakpoint.MdAndUp">
-            <MudIconButton Class="visible-md d-flex justify-content-end text-white" Icon="@Icons.Material.Filled.Menu"
-                           OnClick="@((e) => DrawerToggle())"/>
-        </MudHidden>
-        <MudSpacer/>
-        <MudText Class="mr-2">Welcome, Tyler!</MudText>
-        <MudMenu>
-            <ActivatorContent>
-                <MudAvatar>
-                    <MudImage Src="Images/Avatar.png"/>
-                </MudAvatar>
-            </ActivatorContent>
-            <ChildContent>
-                <MudMenu Color="Color.Dark" Label="Settings" Class="mud-link-item"
-                         StartIcon="@Icons.Material.Filled.Settings">
-                    <MudMenuItem Label="MongoDB" Class="mud-link-item text-decoration-none"
-                                 Icon="@Icons.Material.Filled.Storage"
-                                 Href="https://cloud.mongodb.com/v2/67aba67be83ef06e960c8169#/overview"/>
-                    <MudMenuItem Label="Azure" Class="mud-link-item text-decoration-none"
-                                 Icon="@Icons.Custom.Brands.MicrosoftAzure" Href="https://portal.azure.com/"/>
+<AuthorizeView>
+    <Authorized>
+        <MudLayout Class="d-flex flex-column min-vh-100">
+            <MudAppBar Class="bg-black">
+                <MudHidden Breakpoint="Breakpoint.SmAndDown">
+                    @if (DrawerOpen)
+                    {
+                        <MudIconButton Icon="@Icons.Material.Filled.ArrowBackIos" Class="text-white" Edge="Edge.Start"
+                                       OnClick="@((e) => DrawerToggle())"/>
+                    }
+                    else
+                    {
+                        <MudIconButton Icon="@Icons.Material.Filled.ArrowForwardIos" Class="text-white"
+                                       Edge="Edge.Start"
+                                       OnClick="@((e) => DrawerToggle())"/>
+                    }
+                </MudHidden>
+                <MudHidden Breakpoint="Breakpoint.MdAndUp">
+                    <MudIconButton Class="visible-md d-flex justify-content-end text-white"
+                                   Icon="@Icons.Material.Filled.Menu"
+                                   OnClick="@((e) => DrawerToggle())"/>
+                </MudHidden>
+                <MudSpacer/>
+                <MudText Class="mr-2">Welcome, Tyler!</MudText>
+                <MudMenu>
+                    <ActivatorContent>
+                        <MudAvatar>
+                            <MudImage Src="Images/Avatar.png"/>
+                        </MudAvatar>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MudMenu Color="Color.Dark" Label="Settings" Class="mud-link-item"
+                                 StartIcon="@Icons.Material.Filled.Settings">
+                            <MudMenuItem Label="MongoDB" Class="mud-link-item text-decoration-none"
+                                         Icon="@Icons.Material.Filled.Storage"
+                                         Href="https://cloud.mongodb.com/v2/67aba67be83ef06e960c8169#/overview"/>
+                            <MudMenuItem Label="Azure" Class="mud-link-item text-decoration-none"
+                                         Icon="@Icons.Custom.Brands.MicrosoftAzure" Href="https://portal.azure.com/"/>
+                        </MudMenu>
+                        <MudDivider/>
+                        <MudMenuItem Label="Logout" Class="mud-link-item text-decoration-none"
+                                     Icon="@Icons.Material.Filled.Logout" @onclick="Logout" Href="/login"/>
+                    </ChildContent>
                 </MudMenu>
-                <MudDivider/>
-                <MudMenuItem Label="Logout" Class="mud-link-item text-decoration-none"
-                             Icon="@Icons.Material.Filled.Logout" Href="/login"/>
-            </ChildContent>
-        </MudMenu>
-    </MudAppBar>
-    <MudDrawer @bind-Open="@DrawerOpen">
-        <NavMenu/>
-    </MudDrawer>
-    <MudMainContent>
-        @Body
-    </MudMainContent>
-    <MudText Class="text-center mb-3">Copyright &copy; @CurrentYear FSL Investing</MudText>
-</MudLayout>
-
-@code {
-    private int CurrentYear { get; } = DateTime.UtcNow.ToLocalTime().Year;
-    private bool DrawerOpen { get; set; } = true;
-    
-    private readonly MudTheme _currentTheme = new()
-    {
-        PaletteLight = new PaletteLight
-        {
-            Primary = "#AA8020",
+            </MudAppBar>
+            <MudDrawer @bind-Open="@DrawerOpen">
+                <NavMenu/>
+            </MudDrawer>
+            <MudMainContent>
+                @Body
+            </MudMainContent>
+            <MudText Class="text-center mb-3">Copyright &copy; @CurrentYear FSL Investing</MudText>
+        </MudLayout>
+    </Authorized>
+    <NotAuthorized>
+        @{
+            NavigateToLogin();
         }
-    };
-    
-    void DrawerToggle()
-    {
-        DrawerOpen = !DrawerOpen;
-    }
-
-}
+    </NotAuthorized>
+</AuthorizeView>
