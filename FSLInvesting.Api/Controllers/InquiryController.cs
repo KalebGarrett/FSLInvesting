@@ -2,6 +2,7 @@
 using FSLInvesting.Api.Authentication;
 using FSLInvesting.Api.Repositories.Interfaces;
 using FSLInvesting.Models;
+using FSLInvesting.Models.Documents;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FSLInvesting.Api.Controllers;
