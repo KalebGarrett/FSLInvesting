@@ -1,8 +1,11 @@
 using FSLInvesting.Api.Authentication;
 using FSLInvesting.Api.Repositories;
 using FSLInvesting.Api.Repositories.Interfaces;
+using FSLInvesting.Api.Services;
 using FSLInvesting.Api.Settings;
 using FSLInvesting.Api.Settings.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +22,14 @@ builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("Mo
 builder.Services.AddSingleton<IMongoDbSettings>(sp => sp.GetRequiredService<IOptions<MongoDbSettings>>().Value);
 
 builder.Services.AddScoped(typeof(IMongoRepository<>), typeof(InquiryRepository<>));
+
+builder.Services.AddDbContext<FslInvestingDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"));
+});
+
+builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+    .AddEntityFrameworkStores<FslInvestingDbContext>();
 
 var app = builder.Build();
 
@@ -37,6 +48,8 @@ else
         options.RoutePrefix = string.Empty;
     });
 }
+
+app.MapIdentityApi<IdentityUser>();
 
 app.UseCors(x => x
     .AllowAnyOrigin()
