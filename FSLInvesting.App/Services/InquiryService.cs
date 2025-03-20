@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.Json;
 using FSLInvesting.Models;
+using FSLInvesting.Models.Documents;
 
 namespace FSLInvesting.App.Services;
 
@@ -23,7 +24,7 @@ public class InquiryService
 
         var json = JsonSerializer.Serialize(inquiry);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
-        var result = await _client.PostAsync("Inquiry", content);
+        var result = await _client.PostAsync("inquiry", content);
 
         return result.IsSuccessStatusCode;
     }
@@ -33,7 +34,7 @@ public class InquiryService
         _client.DefaultRequestHeaders.Clear();
         _client.DefaultRequestHeaders.Add(Header, ApiKey);
 
-        var result = await _client.GetAsync("Inquiries");
+        var result = await _client.GetAsync("inquiries");
 
         if (!result.IsSuccessStatusCode)
         {
@@ -52,6 +53,6 @@ public class InquiryService
     {
         _client.DefaultRequestHeaders.Clear();
         _client.DefaultRequestHeaders.Add(Header, ApiKey);
-        await _client.DeleteAsync($"Inquiry/{id}");
+        await _client.DeleteAsync($"inquiry/{id}");
     }
 }
