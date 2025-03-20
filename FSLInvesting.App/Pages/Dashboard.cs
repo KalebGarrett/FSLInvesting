@@ -1,5 +1,6 @@
 ﻿using FSLInvesting.App.Services;
 using FSLInvesting.Models;
+using FSLInvesting.Models.Documents;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
@@ -8,6 +9,7 @@ namespace FSLInvesting.App.Pages;
 public partial class Dashboard
 {
     [Inject] private InquiryService _inquiryService { get; set; }
+    [Inject] private NavigationManager NavigationManager { get; set; }
     private List<InquiryModel> Inquiries { get; set; } = new();
     private string[] Labels { get; set; } = [];
     private Position LegendPosition { get; set; } = Position.Right;
@@ -64,5 +66,10 @@ public partial class Dashboard
         ];
 
         Data = [BlueLeads, GreenLeads, RedLeads];
+    }
+
+    private void NotAuthorized()
+    {
+        NavigationManager.NavigateTo("login");
     }
 }

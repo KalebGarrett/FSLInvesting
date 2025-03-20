@@ -3,6 +3,7 @@ using CsvHelper;
 using FSLInvesting.App.Pages.Components;
 using FSLInvesting.App.Services;
 using FSLInvesting.Models;
+using FSLInvesting.Models.Documents;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
