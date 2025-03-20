@@ -35,6 +35,9 @@
       <Compile Update="Pages\Login.cs">
         <DependentUpon>Login.razor</DependentUpon>
       </Compile>
+      <Compile Update="Layout\MainLayout.cs">
+        <DependentUpon>MainLayout.razor</DependentUpon>
+      </Compile>
     </ItemGroup>
     
 </Project>
