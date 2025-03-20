@@ -6,13 +6,13 @@ namespace FSLInvesting.App.Pages.Components;
 
 public partial class DeleteInquiryDialog
 {
+    [Inject] private InquiryService InquiryService { get; set; }
+    [Inject] private ISnackbar Snackbar { get; set; }
     [CascadingParameter] private IMudDialogInstance MudDialog { get; set; }
     [Parameter] public string ContentText { get; set; }
     [Parameter] public string ButtonText { get; set; }
     [Parameter] public Color Color { get; set; }
     [Parameter] public string Id { get; set; }
-    [Inject] private InquiryService InquiryService { get; set; }
-    [Inject] private ISnackbar Snackbar { get; set; }
     
     private void Cancel() => MudDialog.Cancel();
     
