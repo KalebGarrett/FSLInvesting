@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using FSLInvesting.Models.Interfaces;
 
-namespace FSLInvesting.Models;
+namespace FSLInvesting.Models.Documents;
 
 [BsonCollection("Inquiries")]
 public class InquiryModel : IDocument
