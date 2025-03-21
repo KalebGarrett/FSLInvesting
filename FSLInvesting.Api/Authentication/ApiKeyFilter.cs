@@ -23,7 +23,7 @@ public class ApiKeyFilter : IAuthorizationFilter
             }
             else
             {
-                var apiKey = _configuration.GetValue<string>("Authentication:ApiKey");
+                var apiKey = Environment.GetEnvironmentVariable("ApiKey");
                 if (!apiKey.Equals(extractedApiKey))
                 {
                     context.Result = new UnauthorizedObjectResult("Invalid API key");

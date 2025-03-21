@@ -1,5 +1,4 @@
 ﻿using FSLInvesting.Api.Repositories.Interfaces;
-using FSLInvesting.Api.Settings.Interfaces;
 using FSLInvesting.Models;
 using FSLInvesting.Models.Interfaces;
 using MongoDB.Driver;
@@ -10,9 +9,10 @@ public class InquiryRepository<TDocument> : IMongoRepository<TDocument> where TD
 {
     private readonly IMongoCollection<TDocument> _collection;
 
-    public InquiryRepository(IMongoDbSettings settings)
+    public InquiryRepository()
     {
-        var database = new MongoClient(settings.ConnectionString).GetDatabase(settings.DatabaseName);
+        var database = new MongoClient(Environment.GetEnvironmentVariable("MongoDbConnectionString"))
+            .GetDatabase("FSLInvesting");
         _collection = database.GetCollection<TDocument>(GetCollectionName(typeof(TDocument)));
     }
 
@@ -44,7 +44,7 @@ public class InquiryRepository<TDocument> : IMongoRepository<TDocument> where TD
 
     private string GetCollectionName(Type documentType)
     {
-        return ((BsonCollectionAttribute) documentType.GetCustomAttributes(
+        return ((BsonCollectionAttribute)documentType.GetCustomAttributes(
             typeof(BsonCollectionAttribute),
             true).FirstOrDefault())?.CollectionName;
     }

@@ -2,11 +2,9 @@ using FSLInvesting.Api.Authentication;
 using FSLInvesting.Api.Repositories;
 using FSLInvesting.Api.Repositories.Interfaces;
 using FSLInvesting.Api.Services;
-using FSLInvesting.Api.Settings;
-using FSLInvesting.Api.Settings.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,16 +14,16 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<ApiKeyFilter>();
 
-builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));
-builder.Services.AddSingleton<IMongoDbSettings>(sp => sp.GetRequiredService<IOptions<MongoDbSettings>>().Value);
+builder.Configuration.AddEnvironmentVariables();
+
+builder.Services.AddScoped<ApiKeyFilter>();
 
 builder.Services.AddScoped(typeof(IMongoRepository<>), typeof(InquiryRepository<>));
 
 builder.Services.AddDbContext<FslInvestingDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"));
+    options.UseSqlServer(Environment.GetEnvironmentVariable("SqlServerConnectionString"));
 });
 
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()

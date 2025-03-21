@@ -10,7 +10,7 @@ public class InquiryService
 {
     private readonly HttpClient _client;
     private const string Header = "x-api-key";
-    private const string ApiKey = "D2355Ca4-9eED-4C6D-Bc49-D4447028759c";
+    private string ApiKey { get; set; } = Environment.GetEnvironmentVariable("ApiKey");
 
     public InquiryService(HttpClient client)
     {
@@ -45,9 +45,10 @@ public class InquiryService
         {
             return new List<InquiryModel>();
         }
-        
+
         var json = await result.Content.ReadAsStringAsync();
-        return JsonSerializer.Deserialize<List<InquiryModel>>(json); }
+        return JsonSerializer.Deserialize<List<InquiryModel>>(json);
+    }
 
     public async Task Delete(string id)
     {
