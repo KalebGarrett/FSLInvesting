@@ -8,8 +8,8 @@ FSL Investing is an app built for my client that offers CRM functionality to str
 
 ## Screenshots
 
-![image](/Documentation/Images/Login)
+![image](Documentation/Images/Login.png)
 
-![image](/Documentation/Images/Dashboard)
+![image](Documentation/Images/Dashboard.png)
 
-![image](/Documentation/Images/Form)
+![image](Documentation/Images/Form.png)
