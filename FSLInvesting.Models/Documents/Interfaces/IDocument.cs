@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace FSLInvesting.Models.Interfaces;
+namespace FSLInvesting.Models.Documents.Interfaces;
 
 public interface IDocument
 {

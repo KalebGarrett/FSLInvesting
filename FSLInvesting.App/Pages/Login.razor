@@ -17,13 +17,16 @@
                              alt="FSL Investing"/>
                         <div class="form-group">
                             <label for="email" class="medium">Email Address <span class="text-danger">*</span></label>
-                            <input @bind="LoginModel.Email" id="email" name="email" type="email" required="required" class="form-control">
+                            <input @bind="UserLogin.Email" id="email" name="email" type="email" required="required"
+                                   class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="password" class="medium">Password <span class="text-danger">*</span></label>
-                            <input @bind="LoginModel.Password" id="password" name="password" type="password" required="required" class="form-control">
+                            <input @bind="UserLogin.Password" id="password" name="password" type="password"
+                                   required="required" class="form-control">
                         </div>
-                        <MudButton Disabled="@CheckInputFields()" type="submit" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Login" Color="Color.Info"
+                        <MudButton Disabled="@CheckInputFields()" type="submit" Variant="Variant.Filled"
+                                   StartIcon="@Icons.Material.Filled.Login" Color="Color.Info"
                                    OnClick="HandleLogin" class="mt-3 w-100 rounded-pill">Login
                         </MudButton>
                     </form>

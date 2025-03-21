@@ -21,9 +21,7 @@ public class AuthenticationService : AuthenticationStateProvider
 
         var accessToken = localStorageService.GetItem<string>("accessToken");
         if (accessToken != null)
-        {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-        }
     }
 
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
@@ -39,8 +37,8 @@ public class AuthenticationService : AuthenticationStateProvider
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, email),
-                new Claim(ClaimTypes.Email, email)
+                new(ClaimTypes.Name, email),
+                new(ClaimTypes.Email, email)
             };
 
             // set the principal
@@ -48,13 +46,13 @@ public class AuthenticationService : AuthenticationStateProvider
             user = new ClaimsPrincipal(identity);
             return new AuthenticationState(user);
         }
-        
+
         return new AuthenticationState(user);
     }
 
-    public async Task<LoginResult> Login(LoginModel login)
+    public async Task<LoginResult> Login(UserLogin userLogin)
     {
-        var json = JsonSerializer.Serialize(login);
+        var json = JsonSerializer.Serialize(userLogin);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
         var result = await _httpClient.PostAsync("/login", content);

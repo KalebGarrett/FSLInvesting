@@ -9,18 +9,18 @@ public partial class MainLayout
 {
     private int CurrentYear { get; } = DateTime.UtcNow.ToLocalTime().Year;
     private bool DrawerOpen { get; set; } = true;
-    [Inject] AuthenticationStateProvider Provider { get; set; }
-    [Inject] NavigationManager NavigationManager { get; set; }
+    [Inject] private AuthenticationStateProvider Provider { get; set; }
+    [Inject] private NavigationManager NavigationManager { get; set; }
 
     private readonly MudTheme _currentTheme = new()
     {
         PaletteLight = new PaletteLight
         {
-            Primary = "#AA8020",
+            Primary = "#AA8020"
         }
     };
 
-    void DrawerToggle()
+    private void DrawerToggle()
     {
         DrawerOpen = !DrawerOpen;
     }

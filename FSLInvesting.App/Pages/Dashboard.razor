@@ -13,7 +13,7 @@
                             Lead Count
                         </MudText>
                         <MudChart
-                            ChartOptions="@(new() { ChartPalette = ["#2979ff", "#1de9b6", "#f44336"] })"
+                            ChartOptions="@(new ChartOptions { ChartPalette = ["#2979ff", "#1de9b6", "#f44336"] })"
                             ChartType="ChartType.Donut" Width="300px" Height="300px" LegendPosition="@LegendPosition"
                             InputData="@Data" InputLabels="@Labels" Class="mt-2">
                             <CustomGraphics>

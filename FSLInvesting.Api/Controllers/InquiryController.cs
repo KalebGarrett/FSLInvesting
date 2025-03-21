@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using FSLInvesting.Api.Authentication;
 using FSLInvesting.Api.Repositories.Interfaces;
-using FSLInvesting.Models;
 using FSLInvesting.Models.Documents;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +9,9 @@ namespace FSLInvesting.Api.Controllers;
 [ApiController]
 public class InquiryController : ControllerBase
 {
-    private readonly IMongoRepository<InquiryModel> _inquiryFormRepository;
+    private readonly IMongoRepository<Inquiry> _inquiryFormRepository;
 
-    public InquiryController(IMongoRepository<InquiryModel> inquiryFormRepository)
+    public InquiryController(IMongoRepository<Inquiry> inquiryFormRepository)
     {
         _inquiryFormRepository = inquiryFormRepository;
     }
@@ -41,8 +40,9 @@ public class InquiryController : ControllerBase
 
     [ServiceFilter(typeof(ApiKeyFilter))]
     [HttpPost("Inquiry")]
-    public async Task<IActionResult> Create(InquiryModel inquiry,
-        [FromHeader(Name = "x-api-key")] [Required] string header)
+    public async Task<IActionResult> Create(Inquiry inquiry,
+        [FromHeader(Name = "x-api-key")] [Required]
+        string header)
     {
         await _inquiryFormRepository.InsertOneAsync(inquiry);
         return Created(inquiry.Id, inquiry);
@@ -50,8 +50,9 @@ public class InquiryController : ControllerBase
 
     [ServiceFilter(typeof(ApiKeyFilter))]
     [HttpPut("Inquiry/{id}")]
-    public async Task<IActionResult> Update(string id, InquiryModel inquiry,
-        [FromHeader(Name = "x-api-key")] [Required] string header)
+    public async Task<IActionResult> Update(string id, Inquiry inquiry,
+        [FromHeader(Name = "x-api-key")] [Required]
+        string header)
     {
         await _inquiryFormRepository.ReplaceOneAsync(id, inquiry);
         return Ok(inquiry);

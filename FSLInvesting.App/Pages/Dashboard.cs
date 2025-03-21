@@ -10,7 +10,7 @@ public partial class Dashboard
 {
     [Inject] private InquiryService _inquiryService { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
-    private List<InquiryModel> Inquiries { get; set; } = new();
+    private List<Inquiry> Inquiries { get; set; } = new();
     private string[] Labels { get; set; } = [];
     private Position LegendPosition { get; set; } = Position.Right;
     private double[] Data { get; set; } = [];
@@ -37,22 +37,13 @@ public partial class Dashboard
         foreach (var inquiry in Inquiries)
         {
             if (inquiry.MonthlyPurchases <= 2)
-            {
                 BlueLeads++;
-            }
             else if (inquiry.MonthlyPurchases is > 2 and <= 5)
-            {
                 GreenLeads++;
-            }
             else
-            {
                 RedLeads++;
-            }
 
-            if (inquiry.AcceptsMonthlyDeals)
-            {
-                AcceptsMoreMonthlyDeals.Add(inquiry.AcceptsMonthlyDeals);
-            }
+            if (inquiry.AcceptsMonthlyDeals) AcceptsMoreMonthlyDeals.Add(inquiry.AcceptsMonthlyDeals);
 
             MonthlyPropertyPurchases.Add(inquiry.MonthlyPurchases);
             AvgMonthlyPurchases = MonthlyPropertyPurchases.Average();

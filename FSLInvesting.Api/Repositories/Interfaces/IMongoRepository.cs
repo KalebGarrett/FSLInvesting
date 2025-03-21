@@ -1,4 +1,4 @@
-﻿using FSLInvesting.Models.Interfaces;
+﻿using FSLInvesting.Models.Documents.Interfaces;
 
 namespace FSLInvesting.Api.Repositories.Interfaces;
 

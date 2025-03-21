@@ -13,9 +13,12 @@ public partial class DeleteInquiryDialog
     [Parameter] public string ButtonText { get; set; }
     [Parameter] public Color Color { get; set; }
     [Parameter] public string Id { get; set; }
-    
-    private void Cancel() => MudDialog.Cancel();
-    
+
+    private void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
     private async void Delete()
     {
         await InquiryService.Delete(Id);

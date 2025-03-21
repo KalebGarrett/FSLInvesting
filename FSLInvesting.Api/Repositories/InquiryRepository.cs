@@ -1,6 +1,6 @@
 ﻿using FSLInvesting.Api.Repositories.Interfaces;
 using FSLInvesting.Models;
-using FSLInvesting.Models.Interfaces;
+using FSLInvesting.Models.Documents.Interfaces;
 using MongoDB.Driver;
 
 namespace FSLInvesting.Api.Repositories;

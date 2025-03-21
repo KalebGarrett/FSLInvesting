@@ -6,12 +6,12 @@ namespace FSLInvesting.Api.Authentication;
 public class ApiKeyFilter : IAuthorizationFilter
 {
     private readonly IConfiguration _configuration;
-    
+
     public ApiKeyFilter(IConfiguration configuration)
     {
         _configuration = configuration;
     }
-    
+
     public void OnAuthorization(AuthorizationFilterContext context)
     {
         try
@@ -24,10 +24,7 @@ public class ApiKeyFilter : IAuthorizationFilter
             else
             {
                 var apiKey = Environment.GetEnvironmentVariable("ApiKey");
-                if (!apiKey.Equals(extractedApiKey))
-                {
-                    context.Result = new UnauthorizedObjectResult("Invalid API key");
-                }
+                if (!apiKey.Equals(extractedApiKey)) context.Result = new UnauthorizedObjectResult("Invalid API key");
             }
         }
         catch (Exception e)
