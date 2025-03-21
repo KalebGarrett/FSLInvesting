@@ -12,7 +12,7 @@ public partial class Login
     [Inject] private NavigationManager NavigationManager { get; set; }
     [Inject] private ISnackbar Snackbar { get; set; }
     private LoginModel LoginModel { get; set; } = new();
-    
+
     private async Task HandleLogin()
     {
         var authStateProvider = (AuthenticationService)AuthenticationStateProvider;
@@ -27,9 +27,14 @@ public partial class Login
             Snackbar.Add(LoginModel.Error, Severity.Error);
         }
     }
-    
+
     private void NavigateToDashboard()
     {
         NavigationManager.NavigateTo("");
+    }
+
+    private bool CheckInputFields()
+    {
+        return string.IsNullOrWhiteSpace(LoginModel.Email) || string.IsNullOrWhiteSpace(LoginModel.Password);
     }
 }
