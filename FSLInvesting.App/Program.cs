@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using FSLInvesting.App.Services;
 using FSLInvesting.App;
+using FSLInvesting.App.Secrets;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using MudBlazor.Services;
@@ -11,7 +12,11 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddScoped(sp => new HttpClient {BaseAddress = new Uri(Environment.GetEnvironmentVariable("ApiUrl")!)});
+builder.Services.AddScoped(_ => new HttpClient
+{
+    BaseAddress = new Uri(Api.ApiUrl)
+});
+
 builder.Services.AddScoped<InquiryService>();
 
 builder.Services.AddScoped<Snackbar>();

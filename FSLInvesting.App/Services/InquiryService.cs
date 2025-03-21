@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Text;
 using System.Text.Json;
+using FSLInvesting.App.Secrets;
 using FSLInvesting.Models;
 using FSLInvesting.Models.Documents;
 
@@ -10,7 +11,6 @@ public class InquiryService
 {
     private readonly HttpClient _client;
     private const string Header = "x-api-key";
-    private string ApiKey { get; set; } = Environment.GetEnvironmentVariable("ApiKey");
 
     public InquiryService(HttpClient client)
     {
@@ -20,7 +20,7 @@ public class InquiryService
     public async Task<bool> Create(InquiryModel inquiry)
     {
         _client.DefaultRequestHeaders.Clear();
-        _client.DefaultRequestHeaders.Add(Header, ApiKey);
+        _client.DefaultRequestHeaders.Add(Header, Api.ApiKey);
 
         var json = JsonSerializer.Serialize(inquiry);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -32,7 +32,7 @@ public class InquiryService
     public async Task<List<InquiryModel>> Get()
     {
         _client.DefaultRequestHeaders.Clear();
-        _client.DefaultRequestHeaders.Add(Header, ApiKey);
+        _client.DefaultRequestHeaders.Add(Header, Api.ApiKey);
 
         var result = await _client.GetAsync("inquiries");
 
@@ -53,7 +53,7 @@ public class InquiryService
     public async Task Delete(string id)
     {
         _client.DefaultRequestHeaders.Clear();
-        _client.DefaultRequestHeaders.Add(Header, ApiKey);
+        _client.DefaultRequestHeaders.Add(Header, Api.ApiKey);
         await _client.DeleteAsync($"inquiry/{id}");
     }
 }
